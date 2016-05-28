@@ -13,6 +13,11 @@ def __save_url(file_name, url, done=False):
         print 'Warning!', file_name, 'does not exist. So I\'m creating it now'
         data = {'downloads':{}}
 
+    if url in data['downloads']:
+        if data['downloads'][url]['complete'] is True:
+            print 'Skipping,', url, 'has already been downloaded'
+            return False
+
     data['downloads'][url] = {
         'start': True,
         'complete': False if not done else True
@@ -21,10 +26,13 @@ def __save_url(file_name, url, done=False):
     with open(file_name, 'w') as outfile:
         json.dump(data, outfile)
 
-def download(url, file_name=None):
+    return True
+
+def fetch_audio(url, file_name=None):
     if file_name is None:
         file_name = 'data.json'
 
-    __save_url(file_name, url)
-    import time; time.sleep(5)
+    if not __save_url(file_name, url):
+        return
+    import time; time.sleep(5) #simulates the download time
     __save_url(file_name, url, True)
