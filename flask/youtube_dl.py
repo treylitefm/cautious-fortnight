@@ -28,11 +28,16 @@ def __save_url(file_name, url, done=False):
 
     return True
 
+def __download(url):
+    bashCommand = "youtube-dl \""+url+"\" --audio-format mp3 --extract-audio -o \"%(title)s-%(id)s.%(ext)s\""
+    import os; os.system(bashCommand)
+
 def fetch_audio(url, file_name=None):
     if file_name is None:
         file_name = 'data.json'
 
     if not __save_url(file_name, url):
         return
-    import time; time.sleep(5) #simulates the download time
+    #import time; time.sleep(5) #simulates the download time
+    __download(url)
     __save_url(file_name, url, True)

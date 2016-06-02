@@ -12,7 +12,6 @@ def hello_world():
 def download():
     print request.data
 
-    
     data = literal_eval(request.data)
 
     if 'url' not in data:
@@ -43,4 +42,4 @@ def __valid_url(url):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
