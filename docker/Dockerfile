@@ -1,8 +1,5 @@
 FROM ubuntu
 RUN apt update
-RUN apt install -y git
-RUN apt install -y python
-RUN apt install -y python-pip
-RUN pip install -y flask
-RUN pip install -y youtube-dl
+RUN apt install -y git python python-pip
+RUN pip install flask youtube-dl
 CMD python server.py
