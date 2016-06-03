@@ -4,14 +4,8 @@ from ast import literal_eval
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
 @app.route('/download', methods=['POST'])
 def download():
-    print request.data
-
     data = literal_eval(request.data)
 
     if 'url' not in data:
@@ -19,10 +13,9 @@ def download():
 
     download_url = data['url']
 
-    if not __valid_url(download_url):
+    if not __valid_youtube_url(download_url):
         raise Exception
     
-    #import ipdb; ipdb.set_trace()
     fetch_audio(download_url)
 
     return json.jsonify({
@@ -31,15 +24,16 @@ def download():
     })
 
 
-def __valid_url(url):
+def __valid_youtube_url(url):
     '''
-    Validate that data passed is actually an url and
-    enumerate acceptable download domains
+    Filter out non-youtube urls
     '''
+    match = re.match('https:\/\/.+youtube\..+', url)
+    if match is None:
+        return False
 
-    #soundcloud and youtube
     return True
 
 if __name__ == '__main__':
-    app.debug = True
+    # app.debug = True
     app.run(host='0.0.0.0')
