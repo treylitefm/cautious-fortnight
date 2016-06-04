@@ -1,24 +1,29 @@
 from flask import Flask, Response, request, json
 from youtube_dl import fetch_audio
 from ast import literal_eval
+import re
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return json.jsonify({})
+    return 'Sup!'
 
 @app.route('/download', methods=['POST'])
 def download():
     data = literal_eval(request.data)
 
     if 'url' not in data:
-        raise Exception
+        return json.jsonify({
+            'success': False    
+        })
 
     download_url = data['url']
 
     if not __valid_youtube_url(download_url):
-        raise Exception
+        return json.jsonify({
+            'success': False    
+        })
     
     fetch_audio(download_url)
 
@@ -39,5 +44,5 @@ def __valid_youtube_url(url):
     return True
 
 if __name__ == '__main__':
-    # app.debug = True
+    app.debug = True
     app.run(host='0.0.0.0')

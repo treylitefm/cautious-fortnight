@@ -1,4 +1,5 @@
 import json
+import os
 
 def __load(file_name):
     with open(file_name) as data:
@@ -10,7 +11,7 @@ def __save_url(file_name, url, done=False):
     try:
         data = __load(file_name)
     except Exception as e:
-        print 'Warning!', file_name, 'does not exist. So I\'m creating it now'
+        print 'Warning!', file_name, 'does not exist. Creating it now'
         data = {'downloads':{}}
 
     if url in data['downloads']:
@@ -29,8 +30,13 @@ def __save_url(file_name, url, done=False):
     return True
 
 def __download(url):
-    bashCommand = "youtube-dl \""+url+"\" --audio-format mp3 --extract-audio -o \"%(title)s-%(id)s.%(ext)s\""
-    import os; os.system(bashCommand)
+    directory = 'music'
+    if not os.path.exists(directory): 
+        print 'Warning! Directory',directory,'does not exist -- Creating it now'
+        os.makedirs(directory)
+
+    bashCommand = "youtube-dl \""+url+"\" --audio-format mp3 --extract-audio -o \""+directory+"/"+"%(title)s-%(id)s.%(ext)s\""
+    os.system(bashCommand)
 
 def fetch_audio(url, file_name=None):
     if file_name is None:
