@@ -1,4 +1,5 @@
 from flask import Flask, Response, request, json
+from flask_cors import cross_origin
 from youtube_dl import fetch_audio
 from ast import literal_eval
 import re
@@ -9,7 +10,8 @@ app = Flask(__name__)
 def index():
     return 'Sup!'
 
-@app.route('/download', methods=['POST'])
+@app.route('/download', methods=['POST', 'OPTIONS'])
+@cross_origin()
 def download():
     data = literal_eval(request.data)
 
@@ -44,5 +46,4 @@ def __valid_youtube_url(url):
     return True
 
 if __name__ == '__main__':
-    app.debug = True
     app.run(host='0.0.0.0')
