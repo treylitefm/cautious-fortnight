@@ -4,6 +4,10 @@ from ast import literal_eval
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return json.jsonify({})
+
 @app.route('/download', methods=['POST'])
 def download():
     data = literal_eval(request.data)
