@@ -1,5 +1,3 @@
-//var manifest = require('./manifest.json');
-
 var args = process.argv;
 
 if (args.length <= 2) {
@@ -18,9 +16,8 @@ var jsonfile = require('jsonfile'),
     manifestPath = './manifest.json',
     configPath = './config.json',
     manifest = require(manifestPath),
-    config = require(configPath),
+    config = {},
     url = matches[0];
-//    port = matches[1];
 
 config['host_url'] = url;
 manifest['permissions'].push(url);
