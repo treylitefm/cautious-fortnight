@@ -1,4 +1,4 @@
-### Medio - Docker
+### Medio Docker Image
 
 Is [docker](https://docs.docker.com/) installed yet?
 

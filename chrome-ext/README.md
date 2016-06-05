@@ -1,4 +1,4 @@
-### Medio Chrome Extension
+### Medio Swipe Chrome Extension
 
 Run the following command to set the request url for the chrome extension:
 
