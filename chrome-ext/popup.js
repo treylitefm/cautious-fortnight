@@ -17,24 +17,35 @@ function getCurrentTabUrl(callback) {
 }
 
 function renderText(text) {
-    document.getElementById('status').textContent = renderText;
+    document.getElementById('notif').textContent = text;
+}
+
+function renderTextOnSuccess(xhr) {
+    if (xhr['status'] == 200) {
+        renderText('Great success!');
+    } else {
+        renderText('Ruh-Roh');
+    }
 }
 
 function loadDoc(url, callback, args) {
-    console.log('dawg', url, args);
     var xhr = new XMLHttpRequest(),
         args = args ? args : {},
         method = args['method'] ? args['method'] : "GET",
         postData = args['postData'] ? args['postData'] : undefined,
         headers = args['headers'] ? args['headers'] : {};
 
-    console.log(xhr,method,postData, 'homie');
     
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200 && callback) {
-            console.log(xhr, callback, 'omarrrrr');
-            callback(xhr);
-        }
+    xhr['onreadystatechange'] = function() {
+        if (xhr['readyState'] == 4) {
+            if (xhr['status'] == 200){
+                if (callback) {
+                    callback(xhr);
+                }
+            } else {
+                renderText('Error processing your request'); 
+            }
+        }    
     }
 
     xhr.open(method, url, true);
@@ -52,15 +63,12 @@ function loadDoc(url, callback, args) {
 
 document.addEventListener('DOMContentLoaded', function() {
     getCurrentTabUrl(function(url) {
-        console.log('oamrrrr', url);
-
-                console.log('done!', document.getElementById("notif"));
 
         var loadConfig = function() {
             // Load config, set host url, then post url to server
 
             var postUrl = function() {
-                loadDoc(hostUrl+"download", undefined, {
+                loadDoc(hostUrl+"download", renderTextOnSuccess, {
                     "method": "POST",
                     "postData": {"url": url},
                     "headers": {"Content-Type": "application/json;charset=UTF-8"}
