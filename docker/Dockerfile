@@ -5,7 +5,7 @@ RUN apt update && apt upgrade -y
 RUN apt install -y python python-pip wget unzip ffmpeg
 
 RUN pip install --upgrade pip
-RUN pip install flask youtube-dl
+RUN pip install flask flask-cors youtube-dl
 
 RUN wget https://github.com/treylitefm/medio/zipball/master
 RUN unzip master -d /usr/src/ && rm master
