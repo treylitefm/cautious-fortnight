@@ -5,6 +5,11 @@ Install dependencies
 $ pip install -r requirements.txt
 ```
 
+Run configure.py
+```
+$ python configure.py
+```
+
 Run application
 ```
 $ python server.py 
