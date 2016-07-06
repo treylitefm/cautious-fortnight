@@ -15,6 +15,8 @@ Run application
 $ python server.py 
 ```
 
+Navigate to `localhost:5000` in browser and voila!
+
 Add rq workers program to /etc/supervisord.conf ([RQ Documentation](http://python-rq.org/docs/jobs/))
 ```
 [program:rqworker]
@@ -40,4 +42,7 @@ Logfile for supervisord.conf (Path can be edited in supervisord.conf)
 $ tail -F /tmp/supervisord.conf
 ```
 
-Navigate to `localhost:5000` in browser and voila!
+Run app in debug mode
+```
+$ export FLASK_DEBUG=1; python server.py
+```

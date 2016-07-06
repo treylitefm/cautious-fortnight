@@ -12,6 +12,8 @@ except:
 
 data['redis'] = {}
 data['redis']['url'] = redis
+data['redis']['host'] = redis_host
+data['redis']['port'] = redis_port
 data['redis']['queues'] = redis_queues
 
 with open('config.json', 'w') as f:
