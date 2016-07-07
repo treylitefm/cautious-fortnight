@@ -2,9 +2,11 @@ from flask import Flask, Response, request, json
 from flask_cors import cross_origin
 from youtube_dl import fetch_audio
 from ast import literal_eval
+from queue import MedioQueue
 import re
 
 app = Flask(__name__)
+q = MedioQueue()
 
 @app.route('/')
 def index():
@@ -17,17 +19,19 @@ def download():
 
     if 'url' not in data:
         return json.jsonify({
-            'success': False    
+            'success': False,
+            'reason': 'url not in request'
         })
 
     download_url = data['url']
 
     if not __valid_youtube_url(download_url):
         return json.jsonify({
-            'success': False    
+            'success': False,
+            'reason': 'invalid url'
         })
     
-    fetch_audio(download_url)
+    q.process(fetch_audio, download_url)
 
     return json.jsonify({
         'success': True,

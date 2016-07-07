@@ -21,7 +21,7 @@ class Model:
     def has_already_been_downloaded(self, url):
         result = self.get_dl_url(url)
 
-        if result is not None and bool(result['finished']) is True:
+        if bool(result) is not False and bool(result['finished']) is True:
             return True
         return False
 
