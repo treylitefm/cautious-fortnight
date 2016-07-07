@@ -5,8 +5,7 @@ with open('config.json', 'r') as f:
 
 REDIS_URL = config['redis']['url']
 
-#QUEUES = config['redis']['queues']
-QUEUES = ['default']
+QUEUES = config['redis']['queues']
 
 
 print REDIS_URL, QUEUES
