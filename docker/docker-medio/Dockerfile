@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 MAINTAINER treylitefm
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python python-pip wget unzip ffmpeg supervisor redis-server vim
+RUN apt-get install -y python python-pip wget unzip ffmpeg supervisor redis-tools vim
 
 RUN pip install --upgrade pip
 RUN pip install flask flask-cors youtube-dl redis rq
