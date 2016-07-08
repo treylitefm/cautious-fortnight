@@ -2,7 +2,7 @@ from flask import Flask, Response, request, json
 from flask_cors import cross_origin
 from youtube_dl import fetch_audio
 from ast import literal_eval
-from queue import MedioQueue
+from medio_queue import MedioQueue
 import re
 
 app = Flask(__name__)
