@@ -18,9 +18,18 @@ def fetch_audio(url, file_name=None):
         print 'Skipping,', url, 'has already been downloaded'
         return False
 
+    url = normalize_url(url)
+
     db.insert_dl_url(url)
     
     #import time; time.sleep(5) #simulates the download time
     __download(url)
 
     db.update_dl_url_to_finished(url)
+
+def normalize_url(url):
+    '''Removes part of url that makes it a playlist so that worker only downloads single song'''
+    amp = url.find('&')
+    channel = url.find('ab_channel')
+    url[:amp+1]+url[channel:]
+    return url[:amp+1]+url[channel:]
