@@ -8,6 +8,8 @@ RUN pip install --upgrade pip
 RUN pip install flask flask-cors youtube-dl redis rq
 
 RUN wget https://github.com/treylitefm/medio/zipball/master
-RUN unzip master -d /usr/src/ && rm master
+RUN mkdir /var/medio
+RUN unzip master -d /var/medio/ && rm master
+RUN DIR=$(ls /var/medio/) && ln -s /var/medio/$DIR/flask/music /music && ln -s /var/medio/$DIR /var/medio/medio
 
-ENTRYPOINT DIR=$(ls /usr/src/) && ln -s /music /usr/src/$DIR/flask/music && python /usr/src/$DIR/flask/server.py
+ENTRYPOINT /bin/bash
