@@ -17,30 +17,36 @@ $ python server.py
 
 Navigate to `localhost:5000` in browser and voila!
 
+Edit 'directory' path variables in supervisord.conf file
+```
+[program:medio]
+command=/usr/bin/python server.py
+process_name=%(program_name)s
 
-Create supervisor config
-```
-$ echo_supervisord_conf > /etc/supervisord.conf
-```
+numprocs=1
 
-Add rq workers program to /etc/supervisord.conf ([RQ Documentation](http://python-rq.org/docs/jobs/))
-```
+directory=/path/to/app
+stopsignal=TERM
+
+autostart=true
+autorestart=true
+
 [program:rqworker]
 command=/usr/local/bin/rq worker -c redis_settings
 process_name=%(program_name)s
 
 numprocs=1
 
-directory=/
+directory=/path/to/app
 stopsignal=TERM
 
 autostart=true
 autorestart=true
 ```
 
-Run rq workers in supervisor (Pass the -n parameter to run supervisor daemon in foreground)
+Run supervisor to load up webapp and rq workers (Pass the -n parameter to run supervisor daemon in foreground)
 ```
-$ supervisord -c /etc/supervisord.conf
+$ supervisord -c supervisord.conf
 ```
 
 Monitor task queue
