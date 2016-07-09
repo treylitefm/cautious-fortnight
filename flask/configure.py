@@ -1,4 +1,15 @@
 import json
+import sys
+
+if len(sys.argv) is not 3:
+    print 'Pass in host and port, likes so:'
+    print 'python configure.py 123:123:123:213 6379'
+    print '--- or ---'
+    print 'python configure.py example.com 7833'
+    sys.exit(1)
+
+redis_host = sys.argv[1]
+redis_port = sys.argv[2]
 
 redis_host = raw_input('[Redis Host]:')
 redis_port = raw_input('[Redis Port No]:')

@@ -7,7 +7,7 @@ $ pip install -r requirements.txt
 
 Run configuration script
 ```
-$ python configure.py
+$ python configure.py [hostname] [port #]
 ```
 
 Run application
