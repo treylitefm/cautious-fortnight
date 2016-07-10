@@ -1,5 +1,7 @@
 ### Medio Flask app
 
+Note: If installed through docker container, none of these setup steps are necessary.
+
 Install dependencies
 ```
 $ pip install -r requirements.txt
