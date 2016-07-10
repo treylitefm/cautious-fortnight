@@ -11,8 +11,6 @@ if len(sys.argv) is not 3:
 redis_host = sys.argv[1]
 redis_port = sys.argv[2]
 
-redis_host = raw_input('[Redis Host]:')
-redis_port = raw_input('[Redis Port No]:')
 redis = 'redis://'+redis_host+':'+redis_port+'/0'
 redis_queues = ['default', 'high', 'medium', 'low']
 try:
