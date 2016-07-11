@@ -7,15 +7,15 @@ Change directories to /path/to/root/of/project/docker, so that Dockerfile is in 
 $ cd /path/to/root/of/project/docker
 ```
 
-Build redis server image
+Pull official redis image
 
 ```bash
-$ docker build -t <username>/redis .
+$ docker pull redis
 ```
 
 Run docker image
 ```
-$ docker run --name redis -d <username>/redis
+$ docker run --name [name-your-container] -d redis redis-container --appendonly yes
 ```
 
 References:
