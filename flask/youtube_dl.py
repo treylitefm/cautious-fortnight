@@ -14,11 +14,11 @@ def __download(url):
 def fetch_audio(url, file_name=None):
     db = Model()
     
+    url = normalize_url(url)
+
     if db.has_already_been_downloaded(url):
         print 'Skipping,', url, 'has already been downloaded'
         return False
-
-    url = normalize_url(url)
 
     db.insert_dl_url(url)
     
