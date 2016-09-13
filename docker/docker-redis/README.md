@@ -15,7 +15,7 @@ $ docker pull redis
 
 Run docker image
 ```
-$ docker run --name [name-your-container] -d redis redis-container --appendonly yes
+$ docker run --name [name-your-container] -d redis redis-server --appendonly yes
 ```
 
 References:
