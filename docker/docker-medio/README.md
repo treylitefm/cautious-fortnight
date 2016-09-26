@@ -21,7 +21,7 @@ $ docker images
 
 Now, building your container should be as simple as:
 ```bash
-$ docker run -it --name [medio-container-name] --link [redis-container-name]:db --restart=always -p 5000:5000 [image-name]
+$ docker run -it --name [medio-container-name] --link [redis-container-name]:db --restart=always -v [host-path]/[container-path] -p 5000:5000 [image-name]
 ```
 
 *Note: The internal port in which the container's flask app runs may change at some point, but as of writing this, the app listens on port 5000 within the container*
