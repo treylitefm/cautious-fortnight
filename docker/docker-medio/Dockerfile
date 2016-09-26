@@ -14,4 +14,7 @@ RUN DIR=$(ls /var/medio/) && ln -s /var/medio/$DIR/flask/music /music && ln -s /
 
 EXPOSE 5000
 
-ENTRYPOINT HOST=$(echo $DB_PORT_6379_TCP_ADDR) && PORT=$(echo $DB_PORT_6379_TCP_PORT) && cd /var/medio/medio/flask && /usr/bin/python configure.py $HOST $PORT && /usr/bin/supervisord -c /var/medio/medio/flask/supervisord.conf && /bin/bash
+WORKDIR /var/medio/medio/flask
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh", "medio-redis-server", "6379"]
