@@ -16,5 +16,5 @@ EXPOSE 5000
 
 WORKDIR /var/medio/medio/flask
 
-COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh", "medio-redis-server", "6379"]
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh", "medio-redis-server", "6379"]
