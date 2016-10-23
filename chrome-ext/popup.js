@@ -22,7 +22,7 @@ function renderText(text) {
 
 function renderTextOnSuccess(xhr) {
     if (xhr['status'] == 200) {
-        renderText('Great success!');
+        renderText(':)');
     } else {
         renderText('Ruh-Roh');
     }
@@ -43,7 +43,7 @@ function loadDoc(url, callback, args) {
                     callback(xhr);
                 }
             } else {
-                renderText('Error processing your request'); 
+                renderText('Ruh-Roh!'); 
             }
         }    
     }
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Load config, set host url, then post url to server
 
             var postUrl = function() {
-                loadDoc(hostUrl+"medio/download", renderTextOnSuccess, {
+                loadDoc(hostUrl+"download", renderTextOnSuccess, {
                     "method": "POST",
                     "postData": {"url": url},
                     "headers": {"Content-Type": "application/json;charset=UTF-8"}

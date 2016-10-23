@@ -31,5 +31,9 @@ def normalize_url(url):
     '''Removes part of url that makes it a playlist so that worker only downloads single song'''
     amp = url.find('&')
     channel = url.find('ab_channel')
-    url[:amp+1]+url[channel:]
-    return url[:amp+1]+url[channel:]
+    if channel > 0 and amp > 0:
+        return url[:amp+1]+url[channel:]
+    elif amp > 0:
+        return url[:amp+1]
+    else:
+        return url
