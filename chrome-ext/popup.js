@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Load config, set host url, then post url to server
 
             var postUrl = function() {
-                loadDoc(hostUrl+"download", renderTextOnSuccess, {
+                loadDoc(hostUrl+"medio/download", renderTextOnSuccess, {
                     "method": "POST",
                     "postData": {"url": url},
                     "headers": {"Content-Type": "application/json;charset=UTF-8"}

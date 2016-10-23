@@ -1,6 +1,7 @@
 from redis import Redis
 import json
 import os, time
+import re
 
 class Model:
     '''Handle redis schema and CRUD'''
@@ -17,7 +18,7 @@ class Model:
 
     def get_dl_url(self, url):
         res = self.conn.hgetall('downloads:'+url)
-        if bool(result) is not False:
+        if bool(res) is not False:
             return res
         else: 
             m = re.match('.+\?v\=(.{11}).*', url)
