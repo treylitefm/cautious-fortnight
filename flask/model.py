@@ -16,7 +16,16 @@ class Model:
         time.tzset()
 
     def get_dl_url(self, url):
-        return self.conn.hgetall('downloads:'+url)
+        res = self.conn.hgetall('downloads:'+url)
+        if bool(result) is not False:
+            return res
+        else: 
+            m = re.match('.+\?v\=(.{11}).*', url)
+            if m:
+                vid_id = m.group(1)
+                keys = self.conn.keys('*'+vid_id+'*')
+                if keys:
+                    return self.conn.hgetall(keys[0])
 
     def has_already_been_downloaded(self, url):
         result = self.get_dl_url(url)
