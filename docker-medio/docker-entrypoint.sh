@@ -10,6 +10,7 @@ while [ $? -eq 1 ]; do
 done
 
 echo Database is ready bub
+sleep 100000
 
-python configure.py $1 $2
-/usr/bin/supervisord -n -c /var/medio/medio/flask/supervisord.conf
+python /var/medio/configure.py $1 $2
+/usr/bin/supervisord -n -c /var/medio/supervisord.conf

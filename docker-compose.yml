@@ -1,0 +1,15 @@
+version: "2"
+services:
+    medio:
+        container_name: medio
+        image: treylitefm/medio
+        volumes:
+            - $PWD/src:/var/medio
+        ports:
+            - "5000:5000"
+        restart: always
+    redis:
+        container_name: medio-redis-server
+        image: redis
+        ports:
+            - "6379:6379"
