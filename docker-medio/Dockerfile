@@ -8,5 +8,7 @@ RUN pip install --upgrade pip
 RUN pip install flask flask-cors youtube-dl redis rq
 EXPOSE 5000
 
-COPY docker-entrypoint.sh .
-ENTRYPOINT ["./docker-entrypoint.sh", "medio-redis-server", "6379"]
+WORKDIR /var/medio
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh", "medio-redis-server", "6379"]

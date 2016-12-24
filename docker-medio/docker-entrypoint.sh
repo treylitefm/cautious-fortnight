@@ -10,7 +10,7 @@ while [ $? -eq 1 ]; do
 done
 
 echo Database is ready bub
-sleep 100000
 
-python /var/medio/configure.py $1 $2
-/usr/bin/supervisord -n -c /var/medio/supervisord.conf
+cd /var/medio
+python configure.py $1 $2
+/usr/bin/supervisord -n -c supervisord.conf
