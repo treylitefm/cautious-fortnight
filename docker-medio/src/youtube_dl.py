@@ -11,8 +11,9 @@ def __download(url):
     bashCommand = "youtube-dl \""+url+"\" --audio-format mp3 --extract-audio -o \""+directory+"/"+"%(title)s-%(id)s.%(ext)s\""
     os.system(bashCommand)
 
-def fetch_audio(url, file_name=None):
-    db = Model()
+def fetch_audio(url, file_name=None, db=None):
+    if not db:
+        db = Model()
     
     url = normalize_url(url)
 
@@ -34,6 +35,6 @@ def normalize_url(url):
     if channel > 0 and amp > 0:
         return url[:amp+1]+url[channel:]
     elif amp > 0:
-        return url[:amp+1]
+        return url[:amp]
     else:
         return url
